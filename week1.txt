@@ -1,0 +1,22 @@
+Stuff to do today (2015.10.12)
+------------------------------
+
+1. Sign up for github account at github.com
+   - clone class repository
+     - https://github.com/rasmussn/UO-2015-Scientific-Programming.git
+2. Sign up for ACISS account at http://aciss-computing.uoregon.edu
+3. Get a NIC account
+4. Plan workshop topics (in addition to or replacing one from announcement)
+5. Do we need to break into subgroups?  A couple of possibilities:
+   - Unix basics
+   - Git basics
+   - Programming basics (makefiles, compiling, linking, running, code structure)
+   - Fortran
+   - GPUs
+   - MPI
+6. Graph theory
+   - see handout
+   - try to find algorithm for traveling salesman problem (think about parallelization)
+7. Data Structures
+   - arrays and data parallelism
+     - C = A + scalar*B  ! where A, B, C are arrays)
