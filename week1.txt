@@ -6,6 +6,7 @@ Stuff to do today (2015.10.12)
      - https://github.com/rasmussn/UO-2015-Scientific-Programming.git
 2. Sign up for ACISS account at http://aciss-computing.uoregon.edu
 3. Get a NIC account
+   - send email to ekeever1@uoregon.edu for account on NIC
 4. Plan workshop topics (in addition to or replacing one from announcement)
 5. Do we need to break into subgroups?  A couple of possibilities:
    - Unix basics
