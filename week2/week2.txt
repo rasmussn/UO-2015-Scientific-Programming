@@ -1,0 +1,15 @@
+Stuff to do today (2015.10.19)
+------------------------------
+
+1. Unix basics
+   - regular expressions
+2. Makefile basics
+3. Data Structures
+   - arrays and data parallelism
+     - C = A + scalar*B  ! where A, B, C are arrays)
+4. Example of arrays in Fortran
+5. Graph theory (for next week)
+   - see handout in week3 folder
+   - try to find algorithm for shortest distance problem
+   - Google Dijkstra's algorithm  (think about parallelization)
+
