@@ -1,5 +1,5 @@
-Stuff to do today (2015.10.12)
-------------------------------
+Stuff to talk about today; where we are headed initially (2015.10.12)
+---------------------------------------------------------------------
 
 1. Sign up for github account at github.com
    - clone class repository
@@ -21,3 +21,5 @@ Stuff to do today (2015.10.12)
 7. Data Structures
    - arrays and data parallelism
      - C = A + scalar*B  ! where A, B, C are arrays)
+
+
