@@ -2,7 +2,7 @@ CC = cc
 CFLAGS = -g -I/usr/local/include
 LDFLAGS = -L/usr/local/lib -lnetcdf
 
-OBJS = # dijkstra.o
+OBJS = dijkstra.o
 
 all: dijkstra_main
 
@@ -16,7 +16,7 @@ dijkstra.o: dijkstra.c
 	$(CC) -c $(CFLAGS) dijkstra.c
 
 check: dijkstra_main
-	@dijkstra
+	@dijkstra -i srModel_forTomographyPaper.nc
 
 clean:
 	rm -f *.o dijkstra
