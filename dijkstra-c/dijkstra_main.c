@@ -1,13 +1,7 @@
+#include <netcdf.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <netcdf.h>
-
-#define FILE_NAME "srModel_forTomographyPaper.nc"
-
-/* This really should be read from the netCDF file and memory dynamically allocated */
-#define NX 241
-#define NY 241
-#define NZ 51
+#include <string.h>
 
 /* Handle errors by printing an error message and exiting with a
  * non-zero status.
@@ -17,34 +11,48 @@
 
 int main(int argc, char* argv[])
 {
+   char filename[128];
    size_t nx, ny, nz;
+   double * u;
 
    /* This will be the netCDF ID for the file, dimension, and data variable. */
    int ncid, dimid, varid_u;
 
-   double * u;
-
    /* Loop indexes, and error handling. */
-   int x, y, retval;
+   int i, retval;
 
-   /* Open the file. */
-   if ((retval = nc_open(FILE_NAME, NC_NOWRITE, &ncid)))          ERR(retval);
+   filename[0] = '\0';
+   for (i=1; i < argc; i++) {
+      if (strncmp("-i", argv[i], 3) == 0) {
+         if (++i == argc) break;
+         strncpy(filename, argv[i], 128);
+      }
+   }
+   if (strlen(filename) < 1) {
+      printf("usage: dijkstra -i filename\n");
+      exit(1);
+   }
+   else {
+      /* Open the file. */
+      if ((retval = nc_open(filename, NC_NOWRITE, &ncid)))         ERR(retval);
+      printf("opened file %s\n", filename);
+   }
 
    /* Get the dimensions of the slowness data u
     */
-   if ((retval = nc_inq_dimid (ncid, "x", &dimid)))               ERR(retval);
-   if ((retval = nc_inq_dimlen(ncid, dimid, &nx )))               ERR(retval);
+   if ((retval = nc_inq_dimid (ncid, "x", &dimid)))                ERR(retval);
+   if ((retval = nc_inq_dimlen(ncid, dimid, &nx )))                ERR(retval);
    printf("dimid and size for dimension x: %d %ld\n", dimid, nx);
-   if ((retval = nc_inq_dimid(ncid, "y", &dimid)))                ERR(retval);
-   if ((retval = nc_inq_dimlen(ncid, dimid, &ny )))               ERR(retval);
+   if ((retval = nc_inq_dimid(ncid, "y", &dimid)))                 ERR(retval);
+   if ((retval = nc_inq_dimlen(ncid, dimid, &ny )))                ERR(retval);
    printf("dimid and size for dimension y: %d %ld\n", dimid, ny);
-   if ((retval = nc_inq_dimid(ncid, "z", &dimid)))                ERR(retval);
-   if ((retval = nc_inq_dimlen(ncid, dimid, &nz )))               ERR(retval);
+   if ((retval = nc_inq_dimid(ncid, "z", &dimid)))                 ERR(retval);
+   if ((retval = nc_inq_dimlen(ncid, dimid, &nz )))                ERR(retval);
    printf("dimid and size for dimension z: %d %ld\n", dimid, nz);
 
    /* Get the varid of the data variable, based on its name.
     */
-   if ((retval = nc_inq_varid(ncid, "u", &varid_u)))              ERR(retval);
+   if ((retval = nc_inq_varid(ncid, "u", &varid_u)))               ERR(retval);
 
    /* Allocate and read the data
     */
@@ -54,12 +62,12 @@ int main(int argc, char* argv[])
       nc_close(ncid);
       exit(1);
    }
-   if ((retval = nc_get_var_double(ncid, varid_u, u)))            ERR(retval);
+   if ((retval = nc_get_var_double(ncid, varid_u, u)))             ERR(retval);
 
    /* Close the file, freeing all resources. */
-   if ((retval = nc_close(ncid)))                                 ERR(retval);
+   if ((retval = nc_close(ncid)))                                  ERR(retval);
 
-   printf("*** SUCCESS reading file %s!\n", FILE_NAME);
+   printf("*** SUCCESS reading file %s!\n", filename);
 
    /*
     * Do dijkstra stuff
